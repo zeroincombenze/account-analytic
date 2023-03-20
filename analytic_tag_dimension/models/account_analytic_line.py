@@ -6,6 +6,6 @@ from odoo import models
 
 
 class AccountAnalyticLine(models.Model):
-    _name = "account.analytic.line"
-    _inherit = ["analytic.dimension.line", "account.analytic.line"]
-    _analytic_tag_field_name = "tag_ids"
+    _name = 'account.analytic.line'
+    _inherit = ['analytic.dimension.line', 'account.analytic.line']
+    _analytic_tag_field_name = 'tag_ids'

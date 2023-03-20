@@ -6,10 +6,11 @@ from odoo import api, models
 
 
 class AnalyticDimensionLine(models.AbstractModel):
-    _name = "analytic.dimension.line"
-    _description = "Analytic Dimension Line"
-    _analytic_tag_field_name = "analytic_tag_ids"
+    _name = 'analytic.dimension.line'
+    _description = 'Analytic Dimension Line'
+    _analytic_tag_field_name = 'analytic_tag_ids'
 
+    @api.multi
     def _handle_analytic_dimension(self, vals):
         Tag = self.env["account.analytic.tag"]
         field = self._analytic_tag_field_name
@@ -62,6 +63,7 @@ class AnalyticDimensionLine(models.AbstractModel):
             new_vals_list.append(vals)
         return super().create(new_vals_list)
 
+    @api.multi
     def write(self, vals):
         """Inject values for dimension fields."""
         if self._analytic_tag_field_name in vals:

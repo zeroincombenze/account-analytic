@@ -10,12 +10,13 @@ class AccountInvoiceReport(models.Model):
     def _get_dimension_fields(self):
         if self.env.context.get("update_custom_fields"):
             return []  # Avoid to report these columns when not yet created
-        return [x for x in self.fields_get().keys() if x.startswith("x_dimension_")]
+        return [x for x in self.fields_get().keys()
+                if x.startswith("x_dimension_")]
 
     def _select(self):
         res = super()._select()
         add_fields = self._get_dimension_fields()
-        add_fields = [", line.{0} as {0}".format(x) for x in add_fields]
+        add_fields = [", sub.{0} as {0}".format(x) for x in add_fields]
         return res + "".join(add_fields)
 
     def _sub_select(self):

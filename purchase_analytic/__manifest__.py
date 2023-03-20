@@ -3,11 +3,13 @@
 
 {
     "name": "Purchase Analytic",
-    "version": "14.0.2.0.0",
-    "author": "Acsone SA/NV, Odoo Community Association (OCA)",
+    "version": "12.0.1.0.0",
+    'author': "Acsone SA/NV,Odoo Community Association (OCA)",
     "category": "Purchase Management",
     "website": "https://github.com/OCA/account-analytic",
-    "depends": ["purchase"],
+    "depends": [
+        "purchase",
+    ],
     "data": ["views/purchase_views.xml"],
     "license": "AGPL-3",
     "installable": True,

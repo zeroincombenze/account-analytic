@@ -1,24 +1,24 @@
-# Copyright 2011-2020 Akretion - Alexis de Lattre
-# Copyright 2016-2020 Camptocamp SA
+# Copyright 2011-2016 Akretion - Alexis de Lattre
+# Copyright 2016 Camptocamp SA
 # Copyright 2020 Druidoo - Iván Todorovich
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import _, api, exceptions, fields, models
+from odoo.tools import float_is_zero
 
 
 class AccountAccountType(models.Model):
     _inherit = "account.account.type"
 
     property_analytic_policy = fields.Selection(
-        selection=[
-            ("optional", "Optional"),
-            ("always", "Always"),
-            ("posted", "Posted moves"),
-            ("never", "Never"),
-        ],
-        string="Policy for analytic account",
-        default="optional",
+        selection=[('optional', 'Optional'),
+                   ('always', 'Always'),
+                   ('posted', 'Posted moves'),
+                   ('never', 'Never')],
+        string='Policy for analytic account',
         company_dependent=True,
+        required=True,
+        default='optional',
         help=(
             "Sets the policy for analytic accounts.\n"
             "If you select:\n"
@@ -35,89 +35,64 @@ class AccountAccountType(models.Model):
     )
 
 
-class AccountAccount(models.Model):
-    _inherit = "account.account"
-
-    def _get_analytic_policy(self):
-        """Extension point to obtain analytic policy for an account"""
-        self.ensure_one()
-        return self.user_type_id.with_company(
-            self.company_id.id
-        ).property_analytic_policy
-
-
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    def _post(self, soft=True):
-        res = super()._post(soft=soft)
-        self.mapped("line_ids")._check_analytic_required()
+    @api.multi
+    def post(self, *args, **kwargs):
+        res = super(AccountMove, self).post(*args, **kwargs)
+        self.mapped('line_ids')._check_analytic_required()
         return res
 
 
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    def _has_analytic_distribution(self):
-        # If the move line has an analytic tag with distribution, the field
-        # analytic_account_id may be empty. So in this case, we do not check it.
-        tags_with_analytic_distribution = self.analytic_tag_ids.filtered(
-            "active_analytic_distribution"
-        )
-        return bool(tags_with_analytic_distribution.analytic_distribution_ids)
+    @api.model
+    def _get_analytic_policy(self, account):
+        """ Extension point to obtain analytic policy for an account """
+        return account.user_type_id.with_context(
+            force_company=account.company_id.id,
+        ).property_analytic_policy
 
+    @api.multi
     def _check_analytic_required_msg(self):
-        self.ensure_one()
-        company_cur = self.company_currency_id
-        if company_cur.is_zero(self.debit) and company_cur.is_zero(self.credit):
-            return None
-        analytic_policy = self.account_id._get_analytic_policy()
-        if (
-            analytic_policy == "always"
-            and not self.analytic_account_id
-            and not self._has_analytic_distribution()
-        ):
-            return _(
-                "Analytic policy is set to 'Always' with account "
-                "'%s' but the analytic account is missing in "
-                "the account move line with label '%s'."
-            ) % (
-                self.account_id.display_name,
-                self.name or "",
-            )
-        elif analytic_policy == "never" and (
-            self.analytic_account_id or self._has_analytic_distribution()
-        ):
-            analytic_account = (
-                self.analytic_account_id
-                or self.analytic_tag_ids.analytic_distribution_ids[:1]
-            )
-            return _(
-                "Analytic policy is set to 'Never' with account "
-                "'%s' but the account move line with label '%s' "
-                "has an analytic account '%s'."
-            ) % (
-                self.account_id.display_name,
-                self.name or "",
-                analytic_account.display_name,
-            )
-        elif (
-            analytic_policy == "posted"
-            and not self.analytic_account_id
-            and self.move_id.state == "posted"
-            and not self._has_analytic_distribution()
-        ):
-            return _(
-                "Analytic policy is set to 'Posted moves' with "
-                "account '%s' but the analytic account is missing "
-                "in the account move line with label '%s'."
-            ) % (
-                self.account_id.display_name,
-                self.name or "",
-            )
-        return None
+        for move_line in self:
+            prec = move_line.company_currency_id.rounding
+            if (float_is_zero(move_line.debit, precision_rounding=prec) and
+                    float_is_zero(move_line.credit, precision_rounding=prec)):
+                continue
+            analytic_policy = self._get_analytic_policy(move_line.account_id)
+            if (analytic_policy == 'always' and
+                    not move_line.analytic_account_id):
+                return _("Analytic policy is set to 'Always' with account "
+                         "%s '%s' but the analytic account is missing in "
+                         "the account move line with label '%s'."
+                         ) % (move_line.account_id.code,
+                              move_line.account_id.name,
+                              move_line.name)
+            elif (analytic_policy == 'never' and
+                    move_line.analytic_account_id):
+                return _("Analytic policy is set to 'Never' with account %s "
+                         "'%s' but the account move line with label '%s' "
+                         "has an analytic account '%s'."
+                         ) % (move_line.account_id.code,
+                              move_line.account_id.name,
+                              move_line.name,
+                              move_line.analytic_account_id.name_get()[0][1])
+            elif (analytic_policy == 'posted' and
+                  not move_line.analytic_account_id and
+                  move_line.move_id.state == 'posted'):
+                return _("Analytic policy is set to 'Posted moves' with "
+                         "account %s '%s' but the analytic account is missing "
+                         "in the account move line with label '%s'."
+                         ) % (move_line.account_id.code,
+                              move_line.account_id.name,
+                              move_line.name)
+            else:
+                return None
 
-    @api.constrains("analytic_account_id", "account_id", "debit", "credit")
+    @api.constrains('analytic_account_id', 'account_id', 'debit', 'credit')
     def _check_analytic_required(self):
         for rec in self:
             message = rec._check_analytic_required_msg()

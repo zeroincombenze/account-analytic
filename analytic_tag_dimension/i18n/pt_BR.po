@@ -65,7 +65,7 @@ msgid "Code"
 msgstr "Código"
 
 #. module: analytic_tag_dimension
-#: code:addons/analytic_tag_dimension/models/account_analytic_dimension.py:0
+#: code:addons/analytic_tag_dimension/models/account_analytic_dimension.py:24
 #, python-format
 msgid "Code can't contain spaces!"
 msgstr "Código não pode conter espaços!"
@@ -96,6 +96,11 @@ msgstr "Exibir Nome"
 #: model:ir.model.fields,field_description:analytic_tag_dimension.field_analytic_dimension_line__id
 msgid "ID"
 msgstr "Identificação"
+
+#. module: analytic_tag_dimension
+#: model:ir.model,name:analytic_tag_dimension.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "LInha da fatura"
 
 #. module: analytic_tag_dimension
 #: model:ir.model,name:analytic_tag_dimension.model_account_invoice_report
@@ -134,13 +139,13 @@ msgid "Tags"
 msgstr "Etiquetas"
 
 #. module: analytic_tag_dimension
-#: code:addons/analytic_tag_dimension/models/account_analytic_tag.py:0
+#: code:addons/analytic_tag_dimension/models/account_analytic_tag.py:30
 #, python-format
 msgid "You can not set two tags from same dimension."
 msgstr "Você não pode definir duas etiquetas da mesma dimensão."
 
 #. module: analytic_tag_dimension
-#: code:addons/analytic_tag_dimension/models/account_analytic_tag.py:0
+#: code:addons/analytic_tag_dimension/models/account_analytic_tag.py:56
 #, python-format
 msgid ""
 "You can not set two tags from same dimension.\n"
@@ -148,9 +153,6 @@ msgid ""
 msgstr ""
 "Você não pode definir duas etiquetas da mesma dimensão.\n"
 " Os registros {} no modelo {} têm {}"
-
-#~ msgid "Invoice Line"
-#~ msgstr "LInha da fatura"
 
 #~ msgid "account.analytic.dimension"
 #~ msgstr "account.analytic.dimension"

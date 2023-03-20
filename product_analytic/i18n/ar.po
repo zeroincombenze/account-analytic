@@ -35,9 +35,9 @@ msgid "Income Analytic Account"
 msgstr "حساب الدخل التحليلي"
 
 #. module: product_analytic
-#: model:ir.model,name:product_analytic.model_account_move_line
-msgid "Journal Item"
-msgstr ""
+#: model:ir.model,name:product_analytic.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "خط الفاتورة"
 
 #. module: product_analytic
 #: model:ir.model,name:product_analytic.model_product_category
@@ -48,6 +48,3 @@ msgstr "فئة المنتج"
 #: model:ir.model,name:product_analytic.model_product_template
 msgid "Product Template"
 msgstr "قالب المنتج"
-
-#~ msgid "Invoice Line"
-#~ msgstr "خط الفاتورة"

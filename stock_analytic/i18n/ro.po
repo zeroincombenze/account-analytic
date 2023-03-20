@@ -30,6 +30,7 @@ msgstr "Cont analitic"
 
 #. module: stock_analytic
 #: model:ir.model.fields,field_description:stock_analytic.field_stock_move__analytic_tag_ids
+#: model:ir.model.fields,field_description:stock_analytic.field_stock_move_line__analytic_tag_ids
 #: model:ir.model.fields,field_description:stock_analytic.field_stock_scrap__analytic_tag_ids
 msgid "Analytic Tags"
 msgstr ""
@@ -53,3 +54,6 @@ msgstr ""
 #: model:ir.model,name:stock_analytic.model_stock_move
 msgid "Stock Move"
 msgstr "Mișcare stoc"
+
+#~ msgid "Quants"
+#~ msgstr "Poziții de stoc"

@@ -26,12 +26,22 @@ msgid "Account Type"
 msgstr "نوع الحساب"
 
 #. module: account_analytic_required
-#: model:ir.model.fields.selection,name:account_analytic_required.selection__account_account_type__property_analytic_policy__always
+#: selection:account.account.type,property_analytic_policy:0
 msgid "Always"
 msgstr "دائماً"
 
 #. module: account_analytic_required
-#: code:addons/account_analytic_required/models/account.py:0
+#: selection:account.account.type,property_analytic_policy:0
+msgid "Always (analytic account or distribution)"
+msgstr ""
+
+#. module: account_analytic_required
+#: selection:account.account.type,property_analytic_policy:0
+msgid "Always (analytic distribution)"
+msgstr ""
+
+#. module: account_analytic_required
+#: code:addons/account_analytic_required/models/account.py:68
 #, python-format
 msgid ""
 "Analytic policy is set to 'Always' with account %s '%s' but the analytic "
@@ -41,7 +51,7 @@ msgstr ""
 "في عنصر اليومية باسم ’%s‘."
 
 #. module: account_analytic_required
-#: code:addons/account_analytic_required/models/account.py:0
+#: code:addons/account_analytic_required/models/account.py:76
 #, python-format
 msgid ""
 "Analytic policy is set to 'Never' with account %s '%s' but the account move "
@@ -51,7 +61,7 @@ msgstr ""
 "’%s‘ تم تحديد حساب التحليلي ’%s‘ ."
 
 #. module: account_analytic_required
-#: code:addons/account_analytic_required/models/account.py:0
+#: code:addons/account_analytic_required/models/account.py:86
 #, python-format
 msgid ""
 "Analytic policy is set to 'Posted moves' with account %s '%s' but the "
@@ -72,12 +82,12 @@ msgid "Journal Item"
 msgstr "عنصر اليومية"
 
 #. module: account_analytic_required
-#: model:ir.model.fields.selection,name:account_analytic_required.selection__account_account_type__property_analytic_policy__never
+#: selection:account.account.type,property_analytic_policy:0
 msgid "Never"
 msgstr "ممنوع"
 
 #. module: account_analytic_required
-#: model:ir.model.fields.selection,name:account_analytic_required.selection__account_account_type__property_analytic_policy__optional
+#: selection:account.account.type,property_analytic_policy:0
 msgid "Optional"
 msgstr "إختياري"
 
@@ -87,7 +97,7 @@ msgid "Policy for analytic account"
 msgstr "سياسة  للحسابات التحليلية"
 
 #. module: account_analytic_required
-#: model:ir.model.fields.selection,name:account_analytic_required.selection__account_account_type__property_analytic_policy__posted
+#: selection:account.account.type,property_analytic_policy:0
 msgid "Posted moves"
 msgstr "القيود المرحّلة"
 

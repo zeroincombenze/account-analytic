@@ -67,7 +67,7 @@ msgid "Code"
 msgstr "الكود"
 
 #. module: analytic_tag_dimension
-#: code:addons/analytic_tag_dimension/models/account_analytic_dimension.py:0
+#: code:addons/analytic_tag_dimension/models/account_analytic_dimension.py:24
 #, python-format
 msgid "Code can't contain spaces!"
 msgstr "لا يمكن ان يحتوي على فراقات!"
@@ -98,6 +98,11 @@ msgstr "اسم العرض"
 #: model:ir.model.fields,field_description:analytic_tag_dimension.field_analytic_dimension_line__id
 msgid "ID"
 msgstr "المعرف"
+
+#. module: analytic_tag_dimension
+#: model:ir.model,name:analytic_tag_dimension.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "خط الفاتورة"
 
 #. module: analytic_tag_dimension
 #: model:ir.model,name:analytic_tag_dimension.model_account_invoice_report
@@ -136,21 +141,18 @@ msgid "Tags"
 msgstr "الاوسام"
 
 #. module: analytic_tag_dimension
-#: code:addons/analytic_tag_dimension/models/account_analytic_tag.py:0
+#: code:addons/analytic_tag_dimension/models/account_analytic_tag.py:30
 #, python-format
 msgid "You can not set two tags from same dimension."
 msgstr "لا يمكن تحديد وسمين من نفس البعد."
 
 #. module: analytic_tag_dimension
-#: code:addons/analytic_tag_dimension/models/account_analytic_tag.py:0
+#: code:addons/analytic_tag_dimension/models/account_analytic_tag.py:56
 #, fuzzy, python-format
 msgid ""
 "You can not set two tags from same dimension.\n"
 " Records {} in the model {} have {}"
 msgstr "لا يمكن تحديد وسمين من نفس البعد."
-
-#~ msgid "Invoice Line"
-#~ msgstr "خط الفاتورة"
 
 #~ msgid "account.analytic.dimension"
 #~ msgstr "حساب.تحليل.بعد"

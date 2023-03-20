@@ -34,9 +34,9 @@ msgid "Income Analytic Account"
 msgstr "Analitični konto prihodkov"
 
 #. module: product_analytic
-#: model:ir.model,name:product_analytic.model_account_move_line
-msgid "Journal Item"
-msgstr ""
+#: model:ir.model,name:product_analytic.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Postavka računa"
 
 #. module: product_analytic
 #: model:ir.model,name:product_analytic.model_product_category
@@ -47,6 +47,3 @@ msgstr "Kategorija proizvoda"
 #: model:ir.model,name:product_analytic.model_product_template
 msgid "Product Template"
 msgstr "Predloga proizvoda"
-
-#~ msgid "Invoice Line"
-#~ msgstr "Postavka računa"

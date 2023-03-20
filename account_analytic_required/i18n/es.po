@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:39+0000\n"
-"PO-Revision-Date: 2022-01-12 14:39+0000\n"
+"PO-Revision-Date: 2021-12-26 11:39+0000\n"
 "Last-Translator: pere-aquarian <pere@aquarian.tech>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
@@ -25,12 +25,22 @@ msgid "Account Type"
 msgstr "Tipo de cuenta"
 
 #. module: account_analytic_required
-#: model:ir.model.fields.selection,name:account_analytic_required.selection__account_account_type__property_analytic_policy__always
+#: selection:account.account.type,property_analytic_policy:0
 msgid "Always"
 msgstr "Siempre"
 
 #. module: account_analytic_required
-#: code:addons/account_analytic_required/models/account.py:0
+#: selection:account.account.type,property_analytic_policy:0
+msgid "Always (analytic account or distribution)"
+msgstr "Siempre (distribución o cuanta analítica)"
+
+#. module: account_analytic_required
+#: selection:account.account.type,property_analytic_policy:0
+msgid "Always (analytic distribution)"
+msgstr "Siempre (distribución analítica)"
+
+#. module: account_analytic_required
+#: code:addons/account_analytic_required/models/account.py:68
 #, python-format
 msgid ""
 "Analytic policy is set to 'Always' with account %s '%s' but the analytic "
@@ -41,7 +51,7 @@ msgstr ""
 "con la etiqueta '%s'."
 
 #. module: account_analytic_required
-#: code:addons/account_analytic_required/models/account.py:0
+#: code:addons/account_analytic_required/models/account.py:76
 #, python-format
 msgid ""
 "Analytic policy is set to 'Never' with account %s '%s' but the account move "
@@ -52,7 +62,7 @@ msgstr ""
 "cuenta analítica '%s'."
 
 #. module: account_analytic_required
-#: code:addons/account_analytic_required/models/account.py:0
+#: code:addons/account_analytic_required/models/account.py:86
 #, python-format
 msgid ""
 "Analytic policy is set to 'Posted moves' with account %s '%s' but the "
@@ -73,12 +83,12 @@ msgid "Journal Item"
 msgstr "Apunte contable"
 
 #. module: account_analytic_required
-#: model:ir.model.fields.selection,name:account_analytic_required.selection__account_account_type__property_analytic_policy__never
+#: selection:account.account.type,property_analytic_policy:0
 msgid "Never"
 msgstr "Nunca"
 
 #. module: account_analytic_required
-#: model:ir.model.fields.selection,name:account_analytic_required.selection__account_account_type__property_analytic_policy__optional
+#: selection:account.account.type,property_analytic_policy:0
 msgid "Optional"
 msgstr "Opcional"
 
@@ -88,9 +98,9 @@ msgid "Policy for analytic account"
 msgstr "Política para la cuenta analítica"
 
 #. module: account_analytic_required
-#: model:ir.model.fields.selection,name:account_analytic_required.selection__account_account_type__property_analytic_policy__posted
+#: selection:account.account.type,property_analytic_policy:0
 msgid "Posted moves"
-msgstr "Movimientos públicados"
+msgstr "Movimientos publicados"
 
 #. module: account_analytic_required
 #: model:ir.model.fields,help:account_analytic_required.field_account_account_type__property_analytic_policy
@@ -108,18 +118,16 @@ msgid ""
 "\n"
 "This field is company dependent."
 msgstr ""
-"Establezca la política para las cuentas analíticas: \n"
-"Si selecciona:\n"
+"Establezca la política para las cuentas analíticas. \n"
+"Si selecciona: \n"
 "- 'Opcional', el contable es libre de poner una cuenta analítica en una "
-"línea de movimiento de una cuenta con este tipo de cuenta; si selecciona. \n"
+"línea de movimiento de una cuenta con este tipo de cuenta.\n"
 "- 'Siempre', el contable recibirá un mensaje de error si no hay una cuenta "
-"analítica; si selecciona. \n"
+"analítica.\n"
 "- 'Movimientos publicados', el contable recibirá un mensaje de error si no "
-"se define una cuenta analítica cuando se publica el movimiento. \n"
+"se define una cuenta analítica cuando se publica el movimiento.\n"
 "- 'Nunca', el contable recibirá un mensaje de error si hay una cuenta "
-"analítica presente.\n"
-"\n"
-"Este campo depende de la compañía."
+"analítica presente."
 
 #~ msgid "Analytic Policy"
 #~ msgstr "Política Analítica"

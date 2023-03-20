@@ -49,7 +49,7 @@ msgstr "Outro parceiro"
 #: model:ir.model.fields,field_description:analytic_partner_hr_timesheet.field_res_partner__timesheet_count
 #: model:ir.model.fields,field_description:analytic_partner_hr_timesheet.field_res_users__timesheet_count
 msgid "Timesheet Activities Number"
-msgstr "Número de Atividades na Planilha de Horas"
+msgstr "Número de Atividades do Apontamento de horas"
 
 #. module: analytic_partner_hr_timesheet
 #: model:ir.model.fields,field_description:analytic_partner_hr_timesheet.field_res_partner__timesheet_ids
